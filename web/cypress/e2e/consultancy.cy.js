@@ -45,6 +45,36 @@ describe('Formulário de Consultoria', () => {
     cy.get('input[type="file"]')
       .selectFile('./cypress/fixtures/1.pdf', { force: true })  
 
+    cy.get('textarea[placeholder="Descreva mais detalhes sobre sua necessidade"]')
+      .should('be.visible')
+      .type('um et Malorum" (The  ethics, very popular during the Renaissance. Tholone in section 1.10.32')
+    
+    const listaTecnologias = ['React.js', 'Node.js', 'Spring Boot', 'PostgreSQL', 'Docker']
+  
+      listaTecnologias.forEach(object => {
+        cy.log(`🔎 - Tecnologias =>  ${object}`)
+        cy.get('input[placeholder="Digite uma tecnologia e pressione Enter"]')  
+          .should('be.visible')        
+          .type(object)
+          .type('{enter}')
+      })
+      
+    listaTecnologias.forEach(object => {
+      cy.contains('label', 'Tecnologias')
+      .parent()
+      .contains('span', object)
+      .should('be.visible')
+    })
+
+    cy.contains('label', 'Li e aceito os termos de uso')
+      .find('input[type="checkbox"]')
+      .should('be.visible')
+      .check()
+      .should('be.checked')
+
+    cy.contains('button', 'Enviar formulário')
+      .should('be.visible')
+      .click()
 
   })
 })
