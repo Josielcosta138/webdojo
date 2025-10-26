@@ -1,8 +1,13 @@
 describe('Formulário de Consultoria', () => {
-  it.only('CT1 - Deve enviar o formulário de consultoria com sucesso.', () => {
+
+  beforeEach(() =>{
+    cy.log("▶️ Inicia Login na aplicação")
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana123')
+  })
 
+  it('CT1 - Deve enviar o formulário de consultoria com sucesso.', () => {
+    
     cy.validationTilesAndTitles('Formulários', 'Consultoria')
 
     cy.get('input[placeholder="Digite seu nome completo"]').type('Fernando Papito')
@@ -43,9 +48,8 @@ describe('Formulário de Consultoria', () => {
       });
 
     cy.get('input[type="file"]')
-      // .selectFile('./cypress/fixtures/1.pdf', { force: true })  
-      .selectFile('./cypress/cypress/fixtures/1.pdf', { force: true })  
-
+      .selectFile('./cypress/fixtures/1.pdf', { force: true })  
+      
     cy.get('textarea[placeholder="Descreva mais detalhes sobre sua necessidade"]')
       .should('be.visible')
       .type('um et Malorum" (The  ethics, very popular during the Renaissance. Tholone in section 1.10.32')
@@ -87,8 +91,6 @@ describe('Formulário de Consultoria', () => {
   })
 
   it('CT2 - Validar formulário inválido.', () =>{
-    cy.start()
-    cy.submitLoginForm('papito@webdojo.com', 'katana123')
 
     cy.validationTilesAndTitles('Formulários', 'Consultoria')
 
@@ -104,7 +106,14 @@ describe('Formulário de Consultoria', () => {
       .should('be.visible')
       .should('have.text', 'Campo obrigatório')
       .and('have.css', 'color', 'rgb(248, 113, 113)')
+  })
 
+  it('CT3 - Testar apenas beforeach.', () => {
+    cy.log(" --->>  Testando beforeEach")
+  })
+
+  afterEach(() => {
+    cy.log("✅- Finalizado Caso de teste na aplicação .")
   })
 
 })
