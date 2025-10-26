@@ -43,7 +43,8 @@ describe('Formulário de Consultoria', () => {
       });
 
     cy.get('input[type="file"]')
-      .selectFile('./cypress/fixtures/1.pdf', { force: true })  
+      // .selectFile('./cypress/fixtures/1.pdf', { force: true })  
+      .selectFile('./cypress/cypress/fixtures/1.pdf', { force: true })  
 
     cy.get('textarea[placeholder="Descreva mais detalhes sobre sua necessidade"]')
       .should('be.visible')

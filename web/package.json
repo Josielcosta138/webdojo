@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "serve -s dist -p 3000",
     "cypress:open": "npx cypress open",
-    "cypress:run": "npx cypress run"
+    "cypress:run": "npx cypress run",
+    "cypress:headed": "npx cypress run --headed"
   },
   "dependencies": {
     "serve": "^14.2.4"

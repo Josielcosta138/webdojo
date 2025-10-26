@@ -1,6 +1,6 @@
 Cypress.Commands.add('start', () => {
     cy.viewport(1440, 900)
-    cy.visit('http://localhost:56327/')
+    cy.visit('http://localhost:50223/')
 })
 
 Cypress.Commands.add('submitLoginForm', (email, senha) => {
@@ -24,4 +24,16 @@ Cypress.Commands.add('checkedTypeContatact', (tipo) => {
     .find('input')  
     .check()
     .should('be.checked')
+})
+
+Cypress.Commands.add('validatePdf', (pdfPath, expectedText) => {
+    cy.task('readPdf', {path: pdfPath}).then((text) => {
+        if(Array.isArray(expectedText)) {
+            expectedText.forEach(expect => {
+                expect(text).to.include(expect);
+            });
+        }else {
+            expect(text).to.include(expectedText);
+        }
+    })
 })
