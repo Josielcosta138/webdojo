@@ -1,12 +1,12 @@
 describe('Formulário de Consultoria', () => {
-  it('CT1 - Deve enviar o formulário de consultoria com sucesso.', () => {
+  it.only('CT1 - Deve enviar o formulário de consultoria com sucesso.', () => {
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana123')
 
     cy.validationTilesAndTitles('Formulários', 'Consultoria')
 
     cy.get('input[placeholder="Digite seu nome completo"]').type('Fernando Papito')
-    cy.get('input[id="email"]').type('teste')
+    cy.get('input[id="email"]').type('josiel@teste.com.br')
     cy.get('input[placeholder="(00) 00000-0000"]').type('11 91234-5678')
       .should('have.value', '(11) 91234-5678')
 
@@ -76,7 +76,36 @@ describe('Formulário de Consultoria', () => {
       .should('be.visible')
       .click()
 
+    // ⚠️ - PONTO DE ATENCÃO A PERFOMANCE (VALIDAR COM VÁRIOS USUARIOs)
+    cy.get('.modal', {timeout:10000})
+      .should('be.visible')
+      .find('.modal-content')
+      .should('be.visible')
+      .and('have.text', 'Sua solicitação de consultoria foi enviada com sucesso! Em breve, nossa equipe entrará em contato através do email fornecido.')
+
   })
+
+  it('CT2 - Validar formulário inválido.', () =>{
+    cy.start()
+    cy.submitLoginForm('papito@webdojo.com', 'katana123')
+
+    cy.validationTilesAndTitles('Formulários', 'Consultoria')
+
+    cy.contains('button', 'Enviar formulário')
+      .should('be.visible')
+      .click()
+
+    //label[text()="Nome Completo *"]//..//p
+
+    cy.contains('label', 'Nome Completo *')
+      .parent()
+      .find('p')
+      .should('be.visible')
+      .should('have.text', 'Campo obrigatório')
+      .and('have.css', 'color', 'rgb(248, 113, 113)')
+
+  })
+
 })
   
 
