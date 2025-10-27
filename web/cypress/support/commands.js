@@ -1,6 +1,11 @@
 Cypress.Commands.add('start', () => {
     cy.viewport(1440, 900)
-    cy.visit('http://localhost:50223/')
+    cy.visit('http://localhost:3000/')
+})
+
+Cypress.Commands.add('login', () => {
+    cy.start()
+    cy.submitLoginForm('papito@webdojo.com', 'katana123')
 })
 
 Cypress.Commands.add('submitLoginForm', (email, senha) => {

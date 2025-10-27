@@ -2,8 +2,7 @@
 describe('Validar PDF.', () => {
 
     it('CT1 - Teste Login sem SKIP.', () => {
-        cy.start()
-        cy.submitLoginForm('papito@webdojo.com', 'katana123');
+        cy.login()
     })
 
     it.skip('CT2 - Teste com erro no pdf Com SKIP', () => {

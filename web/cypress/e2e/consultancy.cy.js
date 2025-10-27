@@ -2,8 +2,8 @@ describe('Formulário de Consultoria', () => {
 
   beforeEach(() =>{
     cy.log("▶️ Inicia Login na aplicação")
-    cy.start()
-    cy.submitLoginForm('papito@webdojo.com', 'katana123')
+    
+    cy.login()
   })
 
   it('CT1 - Deve enviar o formulário de consultoria com sucesso.', () => {

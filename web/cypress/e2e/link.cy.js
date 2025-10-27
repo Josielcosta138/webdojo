@@ -1,8 +1,7 @@
 describe('Validar link', () => {
     it('CT1 - Validar link e nova aba removendo target', () => {
 
-        cy.start();
-        cy.submitLoginForm('papito@webdojo.com', 'katana123');
+        cy.login()
 
         cy.get('a[data-cy="instagram-link"]')
             .should('have.attr', 'href', 'https://www.instagram.com/qapapito')
