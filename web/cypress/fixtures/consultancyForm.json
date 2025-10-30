@@ -1,0 +1,42 @@
+{
+    "personal": {
+        "name": "Fernando papito",
+        "email": "papito@teste.com.br",
+        "phone": "11 99999-1000",
+        "consultancyType": "Individual",
+        "personType": "cpf",
+        "document": "12345678909",
+        "discoveryChannel": [
+            "Instagram",
+            "Linkedin",
+            "Udamy",
+            "Youtube"
+        ],
+        "file" :"'./cypress/fixtures/1.pdf'",
+        "description": "Lorem ipson teste teste",
+        "techs" : [
+            "React.js",
+            "Nojde",
+            "Spring Bot",
+            "Docker"
+        ],
+        "terms": true
+    },
+    "company":{
+        "name": "Fernando papito",
+        "email": "papito@teste.com.br",
+        "phone": "11 99999-1000",
+        "consultancyType": "Individual",
+        "personType": "cnpj",
+        "document": "58026732000130",
+        "discoveryChannel": [
+            "Linkedin"
+        ],
+        "file" :"'./cypress/fixtures/1.pdf'",
+        "description": "Lorem ipson teste teste",
+        "techs" : [
+            "Cypress"
+        ],
+        "terms": true
+    }
+}

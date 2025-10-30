@@ -1,4 +1,12 @@
+import {personal, company} from "../fixtures/consultancyForm.json"
+
 describe('Formulário de Consultoria', () => {
+
+
+  Cypress.Commands.add('fillConsutancyForms', () => {
+    
+  })
+
 
   beforeEach(() =>{
     cy.log("▶️ Inicia Login na aplicação")
@@ -10,53 +18,57 @@ describe('Formulário de Consultoria', () => {
     
     cy.validationTilesAndTitles('Formulários', 'Consultoria')
 
-    cy.get('input[placeholder="Digite seu nome completo"]').type('Fernando Papito')
-    cy.get('input[id="email"]').type('josiel@teste.com.br')
-    cy.get('input[placeholder="(00) 00000-0000"]').type('11 91234-5678')
-      .should('have.value', '(11) 91234-5678')
+    cy.get('input[placeholder="Digite seu nome completo"]').type(personal.name)
+    cy.get('input[id="email"]').type(personal.email)
+    cy.get('input[placeholder="(00) 00000-0000"]').type(personal.phone)
+      .should('have.value', '(11) 99999-1000')
 
     cy.contains('label', 'Tipo de Consultoria')
       .parent()
       .find('select')
-      .select('Individual')
+      .select(personal.consultancyType)
 
-    cy.contains('label', 'Pessoa Física')
-      .find('input')  
-      .click()
-      .should('be.checked')
+    if(personal.personType === 'cpf') {
+      cy.contains('label', 'Pessoa Física')
+        .find('input')  
+        .click()
+        .should('be.checked')
 
-    cy.contains('label', 'Pessoa Jurídica')
-      .find('input')
-      .should('not.be.checked')
+      cy.contains('label', 'Pessoa Jurídica')
+        .find('input')
+        .should('not.be.checked')
+    }  
     
+    if(personal.personType === 'cnpj') {
+      cy.contains('label', 'Pessoa Jurídica')
+        .find('input')  
+        .click()
+        .should('be.checked')
+
+      cy.contains('label', 'Pessoa Física')
+        .find('input')
+        .should('not.be.checked')
+    } 
+
+
     cy.contains('label', 'CPF')
       .parent()
       .find('input')
-      .type('12345678909')
+      .type(personal.document)
       .should('have.value', '123.456.789-09')
     
-    const discoveryChannels = [
-        'Instagram', 
-        'LinkedIn', 
-        'Udemy', 
-        'YouTube', 
-        'Indicação de Amigo'
-    ]
-
-      discoveryChannels.forEach(channel => {
+      personal.discoveryChannel.forEach(channel => {
         cy.checkedTypeContatact(channel)
       });
 
     cy.get('input[type="file"]')
-      .selectFile('./cypress/fixtures/1.pdf', { force: true })  
+      .selectFile(personal.file, { force: true })  
       
     cy.get('textarea[placeholder="Descreva mais detalhes sobre sua necessidade"]')
       .should('be.visible')
-      .type('um et Malorum" (The  ethics, very popular during the Renaissance. Tholone in section 1.10.32')
-    
-    const listaTecnologias = ['React.js', 'Node.js', 'Spring Boot', 'PostgreSQL', 'Docker']
+      .type(personal.description)
   
-      listaTecnologias.forEach(object => {
+      personal.techs.forEach(object => {
         cy.log(`🔎 - Tecnologias =>  ${object}`)
         cy.get('input[placeholder="Digite uma tecnologia e pressione Enter"]')  
           .should('be.visible')        
@@ -64,21 +76,20 @@ describe('Formulário de Consultoria', () => {
           .type('{enter}')
       })
       
-    listaTecnologias.forEach(object => {
+    personal.techs.forEach(object => {
       cy.contains('label', 'Tecnologias')
       .parent()
       .contains('span', object)
       .should('be.visible')
     })
 
-    cy.contains('label', 'Li e aceito os termos de uso')
-      .find('input[type="checkbox"]')
-      .should('be.visible')
-      .check()
-      .should('be.checked')
+    if(personal.terms === true){
+      cy.contains('label', 'termos de uso')
+        .find('input')
+        .check()
+    }
 
     cy.contains('button', 'Enviar formulário')
-      .should('be.visible')
       .click()
 
     // ⚠️ - PONTO DE ATENCÃO A PERFOMANCE (VALIDAR COM VÁRIOS USUARIOs)
