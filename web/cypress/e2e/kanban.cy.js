@@ -1,5 +1,6 @@
 describe('Kanban board', () => {
     it('Deve mover tarefas de To Do para Done', () => {
+        cy.start()
         cy.login()
 
         cy.contains('Kanban')
@@ -14,7 +15,5 @@ describe('Kanban board', () => {
             .trigger('drop', { dataTransfer }) //fim de arraste
             .find('h3')
             .should('have.text', 'Done (4)')
-
-        
     })
 })

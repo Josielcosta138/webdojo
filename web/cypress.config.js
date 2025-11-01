@@ -1,19 +1,63 @@
 const { defineConfig } = require("cypress");
-const {readPdfFile} = require('./cypress/support/pdfUtils');
+const fs = require('fs');
+const path = require('path');
+const { readPdfFile } = require('./cypress/support/pdfUtils');
+
+// Caminho para o arquivo temporário
+const envPath = path.join(__dirname, 'cypress', 'env.json');
 
 module.exports = defineConfig({
   
-  watchForFileChanges: false,
+  // watchForFileChanges: true,
   e2e: {
     browser: "electron",
     setupNodeEvents(on, config) {
-      on('task', {
-        readPdf({ path }){
-          return readPdfFile(path)
-        }
-      })
-      return config;
+
+        on('task', {
+          readPdf({ path }){
+            return readPdfFile(path)
+          },
+
+          saveToken(token) {
+          const envData = fs.existsSync(envPath)
+            ? JSON.parse(fs.readFileSync(envPath, 'utf8'))
+            : {};
+
+          envData.token = token;
+          fs.writeFileSync(envPath, JSON.stringify(envData, null, 2));
+          config.env.token = token;
+
+          return token;
+        },
+
+        saveDate(data) {
+          const envData = fs.existsSync(envPath)
+            ? JSON.parse(fs.readFileSync(envPath, 'utf8'))
+            : {};
+
+          envData.date = data;
+          fs.writeFileSync(envPath, JSON.stringify(envData, null, 2));
+          config.env.date = data;
+
+          return data;
+        },
+
+        readToken() {
+          if (!fs.existsSync(envPath)) return null;
+          const envData = JSON.parse(fs.readFileSync(envPath, 'utf8'));
+          return envData.token || null;
+        },
+
+        readDate() {
+          if (!fs.existsSync(envPath)) return null;
+          const envData = JSON.parse(fs.readFileSync(envPath, 'utf8'));
+          return envData.date || null;
+        },
+          
+
+      });
+
+      return config
     },
-    // defaultCommandTimeout: 10000
   },
 });

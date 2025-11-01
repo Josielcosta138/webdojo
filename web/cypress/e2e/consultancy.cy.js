@@ -2,15 +2,11 @@ import {personal, company} from "../fixtures/consultancyForm.json"
 
 describe('Formulário de Consultoria', () => {
 
-
-  Cypress.Commands.add('fillConsutancyForms', () => {
-    
-  })
-
+  Cypress.Commands.add('fillConsutancyForms', () => {})
 
   beforeEach(() =>{
     cy.log("▶️ Inicia Login na aplicação")
-    
+
     cy.login()
   })
 
