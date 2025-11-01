@@ -91,7 +91,7 @@ cypress/
 
 ## 👨‍💻 Autor
 
-![Josiel Costa - Foto de Perfil](/cypress/fixtures/euPerfilEmpresarial.jpg)
+![Josiel Costa - Foto de Perfil](/cypress/web/cypress/fixtures/euPerfilEmpresarial.jpg)
 
 **Josiel Costa**  
 Especialista em QA | Cypress | CI  
