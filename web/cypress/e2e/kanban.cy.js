@@ -1,6 +1,6 @@
 describe('Kanban board', () => {
     it('Deve mover tarefas de To Do para Done', () => {
-        cy.start()
+        
         cy.login()
 
         cy.contains('Kanban')

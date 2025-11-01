@@ -1,16 +1,10 @@
 import { dataAtualFormatada } from '../support/utils.js';
 
-Cypress.Commands.add('start', () => {
-    cy.viewport(1440, 900)
-})
-
 Cypress.Commands.add('login', (ui = false, email, senha) => {
-    
-    cy.start() 
 
-    if(ui === true) {
+    if(ui) {
 
-        cy.visit('http://localhost:3000')
+        cy.visit('/')
 
             cy.get('#email').type(email)
             cy.get('#password').type(senha)
@@ -57,7 +51,7 @@ Cypress.Commands.add('login', (ui = false, email, senha) => {
 
         cy.setCookie('login_date', data)
 
-        cy.visit('http://localhost:3000/dashboard', {
+        cy.visit('/dashboard', {
             onBeforeLoad(win) {
             win.localStorage.setItem('token', token)
         },
@@ -67,10 +61,9 @@ Cypress.Commands.add('login', (ui = false, email, senha) => {
 }
 })
 
-
 Cypress.Commands.add('saveAuthenticationTokenBeforeLogout', (email, senha) => {
 
-    cy.visit('http://localhost:3000')
+    cy.visit('/')
 
         cy.get('#email').type(email)
         cy.get('#password').type(senha)

@@ -6,7 +6,7 @@ describe('Validar PDF.', () => {
     })
 
     it.skip('CT2 - Teste com erro no pdf Com SKIP', () => {
-        cy.start()
+
         cy.submitLoginForm('papito@webdojo.com', 'katana123');
 
         const pdfPath = '.cypress/fixtures/RelatorioItensPorCliente.pdf';

@@ -4,13 +4,16 @@ const path = require('path');
 const { readPdfFile } = require('./cypress/support/pdfUtils');
 
 // Caminho para o arquivo temporário
-const envPath = path.join(__dirname, 'cypress', 'env.json');
+const envPath = path.join(__dirname, 'cypress/fixtures', 'envToken.json');
 
 module.exports = defineConfig({
   
   // watchForFileChanges: true,
   e2e: {
     browser: "electron",
+    baseUrl: "http://localhost:3000",
+    viewportWidth: 1440,
+    viewportHeight: 900,
     setupNodeEvents(on, config) {
 
         on('task', {

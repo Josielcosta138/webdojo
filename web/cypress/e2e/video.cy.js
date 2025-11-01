@@ -1,7 +1,7 @@
 describe('Reproduzir video.', () => {
     it('Deve permitir reproduzir video exemplo.', () => {
-        cy.start();
-        cy.submitLoginForm('papito@webdojo.com', 'katana123')
+        
+        cy.login();
 
         cy.contains('button', 'Video')
             .click()

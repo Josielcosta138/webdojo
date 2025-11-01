@@ -1,0 +1,4 @@
+cypress/videos
+cypress/screenshots
+cypress/fixtures/RelatorioItensPorCliente.pdf
+node_modules

@@ -2,7 +2,7 @@ import { dataAtualFormatada } from '../support/utils.js';
 
 describe('Login Test', () => {
 
-  it.only('CT1 - Deve logar com sucesso.', () => {
+  it('CT1 - Deve logar com sucesso.', () => {
     cy.login(true, 'papito@webdojo.com', 'katana123')
     
 
