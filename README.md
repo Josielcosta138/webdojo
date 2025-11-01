@@ -1,39 +1,111 @@
-# 🥋 WebDojo
 
-![WebDojo Cover](.github/cover.png)
 
-## 🚀 Sobre o Projeto
+# 🧪 Testes Automatizados - WebDojo com Cypress
 
-O **WebDojo** é um aplicativo exclusivo para os alunos do **Curso Ninja do Cypress**, ministrado pelo mestre **Fernando Papito**! 🥷💻 Ele foi criado para ser um **campo de treinamento prático**, onde os alunos podem aprimorar suas habilidades em automação de testes com desafios e exercícios focados no **Cypress**.
+Este repositório contém os testes automatizados da aplicação **WebDojo**, desenvolvidos com o framework **Cypress**. Os testes cobrem funcionalidades críticas da aplicação e são organizados para facilitar manutenção, escalabilidade e integração contínua.
 
-🛠️ Tecnologias Utilizadas
+Ele é um projeto de Estudo aplicado com o curso:
+(Ninja do Cypress Uma jornada completa para aprender do absoluto ZERO!). 
 
-- [x] Git & GitHub 🌍 (Controle de versão e repositório remoto)
-- [x] Bash (Linha de Comando) 💻 (Execução de scripts e comandos)
-- [x] Visual Studio Code 🖥️ (Editor de código recomendado)
-- [x] Node.js (22+) 🟢 (Runtime JavaScript)
-- [x] Gerenciador de pacotes (npm ou yarn) 📦 (Dependências do projeto)
-- [x] Cypress 🧪 (Framework de testes end-to-end)
-- [x] Docker & Docker Compose 🐳 (Ambiente isolado para execução)
-- [x] PostgreSQL 🗄 (Banco de dados relacional)
-- [x] Use Bruno 🔌 (Cliente de API para testes de requisições)
+Pelo professor: Fernando Papito.
 
-## 📖 Como Usar
+---
 
-As instruções detalhadas de instalação e uso do **WebDojo** estão disponíveis dentro do **Curso Ninja do Cypress**.
+## 🚀 Como executar o projeto
 
-🔗 **Acesse o curso e seja Ninja da Automação em Cypress!** 👉 [ninjadocypress.com.br](https://ninjadocypress.com.br)
+### 1. Instalar dependências
 
-## ⚠️ Contribuição
+Certifique-se de ter o Node.js instalado. Em seguida, instale as dependências do projeto:
 
-O **WebDojo** é um ambiente **exclusivo** para os alunos do **Curso Ninja do Cypress**, e por isso, **não aceita contribuições externas**.
+```bash
+npm install
+```
 
-📢 Para suporte e dúvidas, utilize os canais oficiais do curso!
+### 2. Executar a aplicação WebDojo
 
-## 🔒 Licença
+A aplicação está no mesmo repositório. Para iniciar o servidor local:
 
-Este projeto é **exclusivo para alunos** do **Curso Ninja do Cypress**. 🚫 O compartilhamento ou distribuição sem autorização é proibido.
+```bash
+npm run dev
+```
 
-------
+Isso irá servir a aplicação na porta `3000`.
 
-💙 Feito com dedicação e muito café por **Fernando Papito** e a equipe do **Curso Ninja do Cypress**. 🚀🔥
+### 3. Executar os testes Cypress
+
+Você pode rodar os testes de diferentes formas:
+
+- **Abrir interface gráfica do Cypress:**
+
+```bash
+npm run cypress:open
+```
+
+- **Executar testes em modo headless:**
+
+```bash
+npm run cypress:run
+```
+
+- **Executar testes com navegador visível:**
+
+```bash
+npm run cypress:headed
+```
+
+---
+
+## 📁 Estrutura do projeto de testes
+
+Abaixo está a estrutura da pasta `cypress`:
+
+```
+cypress/
+├── actions/
+│   └── consultancy.actions.js
+├── e2e/
+├── fixtures/
+│   ├── 1.pdf
+│   ├── consultancyForm.json
+│   ├── endereceos.json
+│   ├── envToken.json
+│   └── RelatorioItensPorCliente.pdf
+├── support/
+│   ├── commands.js
+│   ├── e2e.js
+│   ├── index.d.ts
+│   ├── pdfUtils.js
+│   └── utils.js
+└── cypress.config.js
+```
+
+### 📌 Descrição das pastas
+
+- `actions/`: Contém arquivos com ações reutilizáveis para testes.
+- `e2e/`: Pasta destinada aos testes end-to-end.
+- `fixtures/`: Arquivos de dados e documentos utilizados nos testes.
+- `support/`: Utilitários, comandos customizados e configurações de suporte.
+- `cypress.config.js`: Arquivo de configuração principal do Cypress.
+
+---
+
+## 👨‍💻 Autor
+
+![Josiel Costa - Foto de Perfil](cypress/fixtures/euPerfilEmpresarial.jpg)
+
+**Josiel Costa**  
+Especialista em QA | Cypress | CI  
+Tecnologias: Java | React.js
+
+GitHub: [github.com/seu-usuario-no-github](https://github.com/seu-usuario-no-github)
+LinkeDin: [https://www.linkedin.com/in/josiel-costa](https://www.linkedin.com/in/josiel-costa-07b2aa140/)
+
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+```
+
+Para baixar, clique/abra o cartão acima com o arquivo gerado. Se quiser que eu personalize mais (como incluir badges, exemplos de testes, ou instruções de CI), é só me chamar!
