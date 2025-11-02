@@ -23,13 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
+import 'cypress-plugin-api';
 
 
 Cypress.Commands.add('getUsersList', () => {
     return cy.api({
         method: 'GET',
-        url: 'https://jsonplaceholder.typicode.com/users',
+        url: '/',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -40,7 +40,7 @@ Cypress.Commands.add('getUsersList', () => {
 Cypress.Commands.add('buscarUserPorId', (id) => {
     return cy.api({
         method: 'GET',
-        url: `https://jsonplaceholder.typicode.com/users/${id}`,
+        url: `/${id}`,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -51,7 +51,7 @@ Cypress.Commands.add('buscarUserPorId', (id) => {
 Cypress.Commands.add('atualizarUser', (id, updatedUser) => {
     return cy.api({
         method: 'PUT',
-        url: `https://jsonplaceholder.typicode.com/users/${id}`,
+        url: `/${id}`,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -63,11 +63,57 @@ Cypress.Commands.add('atualizarUser', (id, updatedUser) => {
 Cypress.Commands.add('listarNomes', () => {
     return cy.api({
             method: 'GET',
-            url: 'https://jsonplaceholder.typicode.com/users',
+            url: '/',
             headers: {
                 'Content-Type': 'application/json'
             },
             failOnStatusCode: false
 
         })
+})
+
+Cypress.Commands.add('criarUsuario', (users) => {
+  return cy.api({
+      method: 'POST',
+      url: 'http://localhost:3333/api/users/register',
+      body: users,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      failOnStatusCode: false
+    })
+})
+
+Cypress.Commands.add('criarUsuarioTypicode', (users) => {
+  return cy.api({
+      method: 'POST',
+      url: '/',
+      body: users,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      failOnStatusCode: false
+    })
+})
+
+Cypress.Commands.add('excluirUser', (id) => {
+    return cy.api({
+      method: 'DELETE',
+      url: `/${id}`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      failOnStatusCode: false
+    })
+})
+
+Cypress.Commands.add('excluirNotFound', (id) => {
+    return cy.api({
+        method: 'DELETE',
+        url: `https://free.mockerapi.com/${id}`,
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        failOnStatusCode: false
+    })
 })
