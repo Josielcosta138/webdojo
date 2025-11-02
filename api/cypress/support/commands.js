@@ -23,3 +23,51 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+
+
+Cypress.Commands.add('getUsersList', () => {
+    return cy.api({
+        method: 'GET',
+        url: 'https://jsonplaceholder.typicode.com/users',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        failOnStatusCode: false
+    })
+})
+
+Cypress.Commands.add('buscarUserPorId', (id) => {
+    return cy.api({
+        method: 'GET',
+        url: `https://jsonplaceholder.typicode.com/users/${id}`,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        failOnStatusCode: false
+    })
+})
+
+Cypress.Commands.add('atualizarUser', (id, updatedUser) => {
+    return cy.api({
+        method: 'PUT',
+        url: `https://jsonplaceholder.typicode.com/users/${id}`,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: updatedUser,
+        failOnStatusCode: false
+    })
+})
+
+Cypress.Commands.add('listarNomes', () => {
+    return cy.api({
+            method: 'GET',
+            url: 'https://jsonplaceholder.typicode.com/users',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            failOnStatusCode: false
+
+        })
+})

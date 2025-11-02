@@ -108,3 +108,4 @@ Cypress.Commands.add('validatePdf', (pdfPath, expectedText) => {
         }
     })
 })
+
