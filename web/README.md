@@ -101,7 +101,7 @@ cypress/
 Especialista em QA | Cypress | CI  
 Tecnologias: Java | React.js
 
-GitHub: [github.com/seu-usuario-no-github](https://github.com/seu-usuario-no-github)
+GitHub: (https://github.com/seu-usuario-no-github)
 LinkeDin: [https://www.linkedin.com/in/josiel-costa](https://www.linkedin.com/in/josiel-costa-07b2aa140/)
 
 

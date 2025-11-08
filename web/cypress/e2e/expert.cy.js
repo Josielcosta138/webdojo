@@ -50,28 +50,10 @@ describe('Texte notificação', () => {
         cy.get('#password').type('katana1233{enter}')        
     });
 
-    it.only('Validar massa de dados com vários usuários.', () =>{
-
-        const start = performance.now();
-
-        cy.visit('/')
-
-        _.times(50, () => {
-            const nome = faker.person.fullName()
-            const email = faker.internet.email()
-            const password = gerarSenha()
+    it.only('Execução: Teste de carga - API Gerar Boletos (100 requisições)', () =>{
         
-            cy.log(`Nome : ${nome}`)
-            cy.log(`Email : ${email}`)
-            cy.log(`Password: ${password}`)
-
-            cy.log(`---------------------`)
-        })
-
-        const end = performance.now()
-        const tempo = (end - start).toFixed(2)
-
-        cy.log(`⏱️ Tempo total do teste: ${tempo} ms`)
+        cy.validarTesteEmMassaDeDados()
+        cy.validarTesteEmMassaDeDados()
     })
 })
 

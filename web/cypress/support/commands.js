@@ -1,4 +1,6 @@
-import { dataAtualFormatada } from '../support/utils.js';
+const fs = require('fs');
+import {faker} from '@faker-js/faker'
+import _ from 'lodash'
 
 Cypress.Commands.add('login', (ui = false, email, senha) => {
 
@@ -109,3 +111,56 @@ Cypress.Commands.add('validatePdf', (pdfPath, expectedText) => {
     })
 })
 
+Cypress.Commands.add('validarTesteEmMassaDeDados', () => {
+
+     const start = performance.now();
+
+        cy.visit('/')
+
+        _.times(100, (i) => {
+            const nome = faker.person.fullName()
+            const email = faker.internet.email()
+            const password = gerarSenha()
+        
+            cy.log(`N° - ${i}`)
+            cy.log(`Nome : ${nome}`)
+            cy.log(`Email : ${email}`)
+            cy.log(`Password: ${password}`)
+
+            cy.log(`---------------------`)
+        })
+
+        const end = performance.now()
+        const tempo = (end - start).toFixed(2)
+
+        cy.log(`⏱️ Tempo total do teste por chamada: ${tempo} ms`)
+
+        cy.task('obeterUsoDoSistema').then((stats) => {
+            cy.log(`🔥 CPU - Percentual médio de uso : ${stats.cpu}%`);
+            cy.log(`💾 Memória - Qtde alocada processo Node : ${stats.memory} MB`);
+
+            // ✅ Salvar variaveis
+            const resultado = {
+            tempoTotal: tempo,
+            cpu: stats.cpu,
+            memoria: stats.memory,
+            dataExecucao: new Date().toISOString(),
+            };
+
+            cy.task('salvarPerformance', resultado);
+        });
+
+
+})
+
+function gerarSenha(tamanho = 8) {
+  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let senha = '';
+  
+  for (let i = 0; i < tamanho; i++) {
+    const indice = Math.floor(Math.random() * caracteres.length);
+    senha += caracteres[indice];
+  }
+  
+  return senha;
+}
