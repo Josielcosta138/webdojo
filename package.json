@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "cypress-plugin-api": "^2.11.2"
+  },
+  "dependencies": {
+    "pdf-parse": "^2.4.5"
   }
 }

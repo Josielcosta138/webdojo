@@ -8,7 +8,7 @@ declare namespace Cypress {
     validationTilesAndTitles(): Chainable<void>,
     validatePdf(pdfPath, expectedText): Chainable<void>,
     readPdfFile(path): Chainable<void>,
-    login(): Chainable<void>,
+    login(value:boolean, email:string, senha:string): Chainable<void>,
     getUsersList(): Chainable<void>,
   }
 }

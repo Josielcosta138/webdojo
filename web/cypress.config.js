@@ -2,6 +2,7 @@ const { defineConfig } = require("cypress");
 const fs = require('fs');
 const path = require('path');
 const { readPdfFile } = require('./cypress/support/pdfUtils');
+const cors = require('cors')
 
 // Caminho para o arquivo temporário
 const envPath = path.join(__dirname, 'cypress/fixtures', 'envToken.json');
