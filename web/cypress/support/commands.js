@@ -111,7 +111,7 @@ Cypress.Commands.add('validatePdf', (pdfPath, expectedText) => {
     })
 })
 
-Cypress.Commands.add('validarTesteEmMassaDeDados', (nome, email, password) => {
+Cypress.Commands.add('validarTesteEmMassaDeDados', (nome, email, password, casoTeste) => {
 
      const start = performance.now();
 
@@ -147,7 +147,11 @@ Cypress.Commands.add('validarTesteEmMassaDeDados', (nome, email, password) => {
                 dataExecucao: new Date().toISOString(),
             };
 
-            cy.task('salvarPerformance', resultado);
+            cy.task('salvarPerformance', 
+                {
+                    dados: resultado, 
+                    casoDeTeste: casoTeste
+                }
+            );
         });
 })
-

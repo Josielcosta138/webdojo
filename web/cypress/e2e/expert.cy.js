@@ -50,14 +50,24 @@ describe('Texte notificação', () => {
         cy.get('#password').type('katana1233{enter}')        
     });
 
-    it.only('Execução: Teste de carga - API Gerar Boletos (100 requisições)', () =>{
+    it.only('Execução: Teste de carga (100 requisições)', () =>{
         
          const nome = faker.person.fullName()
          const email = faker.internet.email()
          const password = gerarSenha()
 
-        cy.validarTesteEmMassaDeDados(nome, email, password)
-        cy.validarTesteEmMassaDeDados(nome, email, password)
+        cy.validarTesteEmMassaDeDados(
+            nome, 
+            email, 
+            password, 
+            'Execução: Teste de carga (100 requisições)'
+        )
+        cy.validarTesteEmMassaDeDados(
+            nome, 
+            email, 
+            password, 
+            'Execução: Teste de carga (100 requisições)'
+        )
     })
 })
 

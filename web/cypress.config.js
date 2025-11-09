@@ -89,7 +89,7 @@ module.exports = defineConfig({
           return { cpu: cpuMedia, memory: memoriaMB };
         },
 
-        salvarPerformance(dados) {
+        salvarPerformance({dados, casoDeTeste}) {
           const dir = path.join(__dirname, 'cypress/results');
           if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
@@ -98,9 +98,11 @@ module.exports = defineConfig({
           const filePath = path.join(dir, 'performance.json');
           fs.writeFileSync(filePath, JSON.stringify(dados, null, 2));
 
+          console.log(`♻ Nome do teste: ${casoDeTeste}`)
+
             // 2️⃣ Gerar conteúdo Markdown
           const markdownContent = `
-          # 🧾 Relatório de Performance — API Gerar Boletos
+          # 🧾 Relatório de Performance — ${casoDeTeste}
 
               **Data:** ${new Date(dados.dataExecucao).toLocaleString()}  
               **Ambiente:** Dev Local  
@@ -111,9 +113,9 @@ module.exports = defineConfig({
 
               | Métrica | Valor | Interpretação |
               |----------|--------|---------------|
-              | ⏱️ **Tempo médio por chamada** | ${dados.tempoTotal} ms (${dados.tempoTotalSengundos} s) | Tempo muito rápido |
-              | 🔥 **Uso médio de CPU** | ${dados.cpu}% | Baixo uso de CPU — sistema estável |
-              | 💾 **Memória alocada** | ${dados.memoria} MB | Dentro do esperado |
+              | ⏱️ **Tempo médio por chamada** | ${dados.tempoTotal} ms (${dados.tempoTotalSengundos} s) 
+              | 🔥 **Uso médio de CPU** | ${dados.cpu}% | 
+              | 💾 **Memória alocada** | ${dados.memoria} 
 
               ---
 
