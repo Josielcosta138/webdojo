@@ -1,6 +1,7 @@
 {
-  "tempoTotal": "37.70",
-  "cpu": "1.60",
-  "memoria": "438.29",
-  "dataExecucao": "2025-11-08T15:17:54.354Z"
+  "tempoTotal": "35.60",
+  "tempoTotalSengundos": 0.0356,
+  "cpu": "0.94",
+  "memoria": "250.91",
+  "dataExecucao": "2025-11-09T01:27:20.101Z"
 }

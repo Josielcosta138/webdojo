@@ -52,8 +52,12 @@ describe('Texte notificação', () => {
 
     it.only('Execução: Teste de carga - API Gerar Boletos (100 requisições)', () =>{
         
-        cy.validarTesteEmMassaDeDados()
-        cy.validarTesteEmMassaDeDados()
+         const nome = faker.person.fullName()
+         const email = faker.internet.email()
+         const password = gerarSenha()
+
+        cy.validarTesteEmMassaDeDados(nome, email, password)
+        cy.validarTesteEmMassaDeDados(nome, email, password)
     })
 })
 
@@ -68,6 +72,3 @@ function gerarSenha(tamanho = 8) {
   
   return senha;
 }
-
-// 💡 Exemplo de uso:
-console.log(gerarSenha(10)); // Ex: "aF3kT9zP1x"

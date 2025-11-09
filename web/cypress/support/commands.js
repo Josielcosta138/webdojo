@@ -111,17 +111,13 @@ Cypress.Commands.add('validatePdf', (pdfPath, expectedText) => {
     })
 })
 
-Cypress.Commands.add('validarTesteEmMassaDeDados', () => {
+Cypress.Commands.add('validarTesteEmMassaDeDados', (nome, email, password) => {
 
      const start = performance.now();
 
         cy.visit('/')
 
         _.times(100, (i) => {
-            const nome = faker.person.fullName()
-            const email = faker.internet.email()
-            const password = gerarSenha()
-        
             cy.log(`N° - ${i}`)
             cy.log(`Nome : ${nome}`)
             cy.log(`Email : ${email}`)
@@ -133,7 +129,10 @@ Cypress.Commands.add('validarTesteEmMassaDeDados', () => {
         const end = performance.now()
         const tempo = (end - start).toFixed(2)
 
+        const segundo = tempo/1000;
+
         cy.log(`⏱️ Tempo total do teste por chamada: ${tempo} ms`)
+        cy.log(`⏱️ Tempo total em segundos: ${segundo} segundos`)
 
         cy.task('obeterUsoDoSistema').then((stats) => {
             cy.log(`🔥 CPU - Percentual médio de uso : ${stats.cpu}%`);
@@ -141,26 +140,14 @@ Cypress.Commands.add('validarTesteEmMassaDeDados', () => {
 
             // ✅ Salvar variaveis
             const resultado = {
-            tempoTotal: tempo,
-            cpu: stats.cpu,
-            memoria: stats.memory,
-            dataExecucao: new Date().toISOString(),
+                tempoTotal: tempo,
+                tempoTotalSengundos: segundo,
+                cpu: stats.cpu,
+                memoria: stats.memory,
+                dataExecucao: new Date().toISOString(),
             };
 
             cy.task('salvarPerformance', resultado);
         });
-
-
 })
 
-function gerarSenha(tamanho = 8) {
-  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let senha = '';
-  
-  for (let i = 0; i < tamanho; i++) {
-    const indice = Math.floor(Math.random() * caracteres.length);
-    senha += caracteres[indice];
-  }
-  
-  return senha;
-}

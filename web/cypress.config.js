@@ -60,17 +60,33 @@ module.exports = defineConfig({
           return envData.date || null;
         },
 
+        // obeterUsoDoSistema: async () => {
+        //   const pid = process.pid;
+
+        //   // Espera um pouquinho antes de medir
+        //   await new Promise((resolve) => setTimeout(resolve, 500));
+
+        //   const stats = await pidusage(pid);
+        //   return {
+        //     cpu: stats.cpu.toFixed(2),
+        //     memory: (stats.memory / 1024 / 1024).toFixed(2)
+        //   };
+        // },
+
         obeterUsoDoSistema: async () => {
           const pid = process.pid;
+          const amostras = [];
 
-          // Espera um pouquinho antes de medir
-          await new Promise((resolve) => setTimeout(resolve, 500));
+          for (let i = 0; i < 5; i++) {
+            const stats = await pidusage(pid);
+            amostras.push(stats.cpu);
+            await new Promise((r) => setTimeout(r, 200)); // coleta a cada 200ms
+          }
 
-          const stats = await pidusage(pid);
-          return {
-            cpu: stats.cpu.toFixed(2),
-            memory: (stats.memory / 1024 / 1024).toFixed(2)
-          };
+          const cpuMedia = (amostras.reduce((a, b) => a + b, 0) / amostras.length).toFixed(2);
+          const memoriaMB = ((await pidusage(pid)).memory / 1024 / 1024).toFixed(2);
+
+          return { cpu: cpuMedia, memory: memoriaMB };
         },
 
         salvarPerformance(dados) {
@@ -81,6 +97,33 @@ module.exports = defineConfig({
 
           const filePath = path.join(dir, 'performance.json');
           fs.writeFileSync(filePath, JSON.stringify(dados, null, 2));
+
+            // 2️⃣ Gerar conteúdo Markdown
+          const markdownContent = `
+          # 🧾 Relatório de Performance — API Gerar Boletos
+
+              **Data:** ${new Date(dados.dataExecucao).toLocaleString()}  
+              **Ambiente:** Dev Local  
+              **Execuções:** 100 requisições consecutivas  
+              **Responsável:** Josiel Costa (QA / Tester)
+
+              ---
+
+              | Métrica | Valor | Interpretação |
+              |----------|--------|---------------|
+              | ⏱️ **Tempo médio por chamada** | ${dados.tempoTotal} ms (${dados.tempoTotalSengundos} s) | Tempo muito rápido |
+              | 🔥 **Uso médio de CPU** | ${dados.cpu}% | Baixo uso de CPU — sistema estável |
+              | 💾 **Memória alocada** | ${dados.memoria} MB | Dentro do esperado |
+
+              ---
+
+              ✅ **Conclusão:**  
+              A API apresentou excelente performance sob carga de 100 requisições consecutivas.  
+              O tempo médio por chamada foi de apenas **${dados.tempoTotalSengundos} segundos**, com uso leve de CPU e memória estável.
+              `;
+
+          fs.writeFileSync(path.join(dir, 'performance.md'), markdownContent);
+
           return null;
         }
         

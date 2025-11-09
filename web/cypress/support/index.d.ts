@@ -10,6 +10,6 @@ declare namespace Cypress {
     readPdfFile(path): Chainable<void>,
     login(value:boolean, email:string, senha:string): Chainable<void>,
     getUsersList(): Chainable<void>,
-    validarTesteEmMassaDeDados():Chainable<void>
+    validarTesteEmMassaDeDados(nome:string, email:string, password:string):Chainable<void>
   }
 }

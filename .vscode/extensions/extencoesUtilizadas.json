@@ -5,6 +5,7 @@
     "christian-kohler.npm-intellisense",
     "christian-kohler.path-intellisense",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "one-mokai-theme"
   ]
 }
