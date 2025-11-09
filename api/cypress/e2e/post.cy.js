@@ -1,13 +1,12 @@
 import 'cypress-plugin-api';
 import { faker } from '@faker-js/faker';
+const fs = require('fs');
+import _ from 'lodash'
+
 
 faker.locale = 'pt_BR';
 
-const user = {
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
-      password: faker.internet.password()
-}
+
 
 const userInvalid = {
       email: faker.internet.email(),
@@ -23,17 +22,26 @@ const userJSOnInvalid = `{
 
 describe('POST /api/users/register', () => {
   
-  it('CT1 - Deve cadastrar um novo usuario', () => {
+  _.times(5, (i) => {
+      it.only( `CT1 - Deve cadastrar um novo usuario. N° ${i+1}` , () => {
 
-    cy.criarUsuario(user).then((response) => {
-        expect(response.status).to.eq(201)
-        expect(response.body).to.have.property('success', true)
-        expect(response.body).to.have.property('message', 'Usuário cadastrado verificado pela - Automação')
-        expect(response.body.user).to.have.property('name', user.name)
-        expect(response.body.user).to.have.property('email', user.email)
-        expect(response.body.user).to.have.property('id')
-    })
-  })  
+        const user = {
+          name: faker.person.fullName(),
+          email: faker.internet.email(),
+          password: faker.internet.password()
+       }
+
+      cy.criarUsuario(user).then((response) => {
+          expect(response.status).to.eq(201)
+          expect(response.body).to.have.property('success', true)
+          expect(response.body).to.have.property('message', 'Usuário cadastrado verificado pela - Automação')
+          expect(response.body.user).to.have.property('name', user.name)
+          expect(response.body.user).to.have.property('email', user.email)
+          expect(response.body.user).to.have.property('id')
+      })
+    })  
+  })
+
 
   it('CT2 - Deve cadastrar usuário inválido.', () => {
   
