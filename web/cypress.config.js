@@ -2,8 +2,6 @@ const { defineConfig } = require("cypress");
 const fs = require('fs');
 const path = require('path');
 const { readPdfFile } = require('./cypress/support/pdfUtils');
-const cors = require('cors')
-const os = require('os');
 const pidusage = require('pidusage');
 
 // Caminho para o arquivo temporário

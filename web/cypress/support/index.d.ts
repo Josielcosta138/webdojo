@@ -11,5 +11,6 @@ declare namespace Cypress {
     login(value:boolean, email:string, senha:string): Chainable<void>,
     getUsersList(): Chainable<void>,
     validarTesteEmMassaDeDados(nome:string, email:string, password:string):Chainable<void>
+    salvarProcessamentoDaSuite(casoTeste:string): Chainable<void>
   }
 }

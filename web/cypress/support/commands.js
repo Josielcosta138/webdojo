@@ -155,3 +155,35 @@ Cypress.Commands.add('validarTesteEmMassaDeDados', (nome, email, password, casoT
             );
         });
 })
+
+
+Cypress.Commands.add('salvarProcessamentoDaSuite', (casoTeste) => {
+    const end = performance.now()
+        const tempo = (end - start).toFixed(2)
+
+        const segundo = tempo/1000;
+
+        cy.log(`⏱️ Tempo total do teste por chamada: ${tempo} ms`)
+        cy.log(`⏱️ Tempo total em segundos: ${segundo} segundos`)
+
+        cy.task('obeterUsoDoSistema').then((stats) => {
+            cy.log(`🔥 CPU - Percentual médio de uso : ${stats.cpu}%`);
+            cy.log(`💾 Memória - Qtde alocada processo Node : ${stats.memory} MB`);
+
+            // ✅ Salvar variaveis
+            const resultado = {
+                tempoTotal: tempo,
+                tempoTotalSengundos: segundo,
+                cpu: stats.cpu,
+                memoria: stats.memory,
+                dataExecucao: new Date().toISOString(),
+            };
+
+            cy.task('salvarPerformance', 
+                {
+                    dados: resultado, 
+                    casoDeTeste: casoTeste
+                }           
+            );
+        })
+})

@@ -22,7 +22,7 @@ const userJSOnInvalid = `{
 
 describe('POST /api/users/register', () => {
   
-  _.times(5, (i) => {
+  _.times(10, (i) => {
       it.only( `CT1 - Deve cadastrar um novo usuario. N° ${i+1}` , () => {
 
         const user = {
@@ -38,7 +38,9 @@ describe('POST /api/users/register', () => {
           expect(response.body.user).to.have.property('name', user.name)
           expect(response.body.user).to.have.property('email', user.email)
           expect(response.body.user).to.have.property('id')
-      })
+        
+        cy.salvarProcessamentoDaSuite(`CT1 - Deve cadastrar um novo usuario. N`)
+        })      
     })  
   })
 
