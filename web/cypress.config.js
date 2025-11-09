@@ -60,19 +60,6 @@ module.exports = defineConfig({
           return envData.date || null;
         },
 
-        // obeterUsoDoSistema: async () => {
-        //   const pid = process.pid;
-
-        //   // Espera um pouquinho antes de medir
-        //   await new Promise((resolve) => setTimeout(resolve, 500));
-
-        //   const stats = await pidusage(pid);
-        //   return {
-        //     cpu: stats.cpu.toFixed(2),
-        //     memory: (stats.memory / 1024 / 1024).toFixed(2)
-        //   };
-        // },
-
         obeterUsoDoSistema: async () => {
           const pid = process.pid;
           const amostras = [];
